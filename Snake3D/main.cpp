@@ -1,6 +1,9 @@
 #include <iostream>
+#include "SnakeApplicationBuilder.h"
 
 int main() {
-	std::cout << "Hello World" << std::endl;
+	SnakeApplicationBuilder *snakeApp = new SnakeApplicationBuilder();
+	snakeApp->run();
+
 	return 0;
 }
