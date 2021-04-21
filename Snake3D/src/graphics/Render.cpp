@@ -18,7 +18,7 @@ void Render::renderSnake() {
 	const float SNAKE_BODY_COLOR[] = { 0.800f, 0.200f, 0.280f };
 	const float SNAKE_HEAD_COLOR[] = { 1.000f, 0.190f, 0.210f };
 
-	Snake* s = new Snake();
+	Snake* s = new Snake(); // todo: change to param 
 	glColor3fv(SNAKE_BODY_COLOR);
 	for (int i = 0; i < s->GetLength(); i++) {
 		glLoadIdentity();
@@ -30,6 +30,8 @@ void Render::renderSnake() {
 		glTranslatef(x, y, z);
 		glutSolidCube(1.0);
 	}
+	
+	delete s; 
 }
 
 void Render::prepareModelView() {
