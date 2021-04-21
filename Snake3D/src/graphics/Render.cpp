@@ -19,7 +19,6 @@ void Render::renderSnake() {
 	const float SNAKE_HEAD_COLOR[] = { 1.000f, 0.190f, 0.210f };
 
 	Snake* s = new Snake();
-
 	glColor3fv(SNAKE_BODY_COLOR);
 	for (int i = 0; i < s->GetLength(); i++) {
 		glLoadIdentity();
@@ -31,9 +30,6 @@ void Render::renderSnake() {
 		glTranslatef(x, y, z);
 		glutSolidCube(1.0);
 	}
-
-
-
 }
 
 void Render::prepareModelView() {
@@ -49,7 +45,6 @@ void Render::prepareModelView() {
 	glMatrixMode(GL_MODELVIEW);
 }
 
-
 void Render::prepareMatrixProjection() {
 	const float fovY = 15;
 	const float aspect = 1;
@@ -61,7 +56,6 @@ void Render::prepareMatrixProjection() {
 	glLoadIdentity();
 	glViewport(0, 0, WIDTH, HEIGHT);
 	gluPerspective(fovY, aspect, zNear, zFar);
-
 }
 
 void Render::displayFunc() {
