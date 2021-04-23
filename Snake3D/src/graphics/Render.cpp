@@ -4,6 +4,9 @@
 const int ::Render::HEIGHT = 800;
 const int ::Render::WIDTH = 600;
 
+int ::Render::POS_X = 0;
+int ::Render::POS_Y = 0;
+  
 void Render::enableGLCapabilities() {
 	const GLfloat BG_Color[] = { 0.275f, 0.784f, 0.827f, 0.0f };
 	glClearColor(BG_Color[0], BG_Color[1], BG_Color[2], BG_Color[3]);
@@ -60,8 +63,12 @@ void Render::prepareMatrixProjection() {
 	gluPerspective(fovY, aspect, zNear, zFar);
 }
 
-void Render::displayFunc() {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void Render::DrawGameBoard() {
+	enableGLCapabilities();
+	prepareMatrixProjection();
+	prepareModelView();
+
+ 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	renderPlane();
 	renderSnake();
 	glLoadIdentity();
@@ -71,19 +78,16 @@ void Render::displayFunc() {
 void Render::Run(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_MULTISAMPLE);
+	 
+    POS_X = (glutGet(GLUT_SCREEN_WIDTH) - WIDTH) >> 1;
+	POS_Y = (glutGet(GLUT_SCREEN_HEIGHT) - HEIGHT) >> 1;
 
-	int posX = (glutGet(GLUT_SCREEN_WIDTH) - WIDTH) >> 1;
-	int posY = (glutGet(GLUT_SCREEN_HEIGHT) - HEIGHT) >> 1;
-
-	glutInitWindowPosition(posX, posY);
+	glutInitWindowPosition(POS_X, POS_Y);
 	glutInitWindowSize(WIDTH, HEIGHT);
 	glutCreateWindow("Snake3D");
-	enableGLCapabilities();
-
-	prepareMatrixProjection();
-	prepareModelView();
-
+	 
 	// callbacks
-	glutDisplayFunc(displayFunc);
+	glutDisplayFunc(Menu::DisplayFunc);
+	glutKeyboardFunc(Menu::Keyboard);
 	glutMainLoop();
 }

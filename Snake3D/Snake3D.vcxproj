@@ -145,12 +145,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\graphics\Menu.cpp" />
     <ClCompile Include="src\graphics\Render.cpp" />
     <ClCompile Include="src\game\SnakeBody.cpp" />
     <ClCompile Include="src\game\Snake.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\Menu.h" />
     <ClInclude Include="src\graphics\Render.h" />
     <ClInclude Include="src\game\SnakeBody.h" />
     <ClInclude Include="src\game\Snake.h" />
