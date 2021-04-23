@@ -82,6 +82,3 @@ void Menu::Keyboard(unsigned char key, int x, int y)
         break;
     }
 }
-
- 
- 
