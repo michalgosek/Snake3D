@@ -1,12 +1,17 @@
 #include "Render.h"
 #include "../game/Snake.h"
 
-const int ::Render::HEIGHT = 800;
+const int ::Render::HEIGHT = 700;
 const int ::Render::WIDTH = 600;
 
 int ::Render::POS_X = 0;
 int ::Render::POS_Y = 0;
   
+void Render::reshapeFunc(int width, int height) {
+	glutPositionWindow(POS_X, POS_Y);
+	glutReshapeWindow(WIDTH, HEIGHT);
+}
+
 void Render::enableGLCapabilities() {
 	const GLfloat BG_Color[] = { 0.275f, 0.784f, 0.827f, 0.0f };
 	glClearColor(BG_Color[0], BG_Color[1], BG_Color[2], BG_Color[3]);
@@ -89,5 +94,6 @@ void Render::Run(int argc, char** argv) {
 	// callbacks
 	glutDisplayFunc(Menu::DisplayFunc);
 	glutKeyboardFunc(Menu::Keyboard);
+	glutReshapeFunc(reshapeFunc);
 	glutMainLoop();
 }
