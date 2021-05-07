@@ -15,6 +15,7 @@ private:
 	void static renderSnake();
 
 	void static initializeCallbacks();
+	void static initializeLighting();
 
 	void static prepareMatrixProjection();
 	void static prepareModelView();

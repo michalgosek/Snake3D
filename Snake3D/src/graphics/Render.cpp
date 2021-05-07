@@ -12,9 +12,16 @@ void Render::reshapeFunc(int width, int height) {
 	glutReshapeWindow(WIDTH, HEIGHT);
 }
 
+void Render::initializeLighting() {
+	glShadeModel(GL_SMOOTH);
+	glEnable(GL_LIGHTING);
+ 	glEnable(GL_LIGHT0);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_COLOR_MATERIAL);
+}
+
 void Render::enableGLCapabilities() {
-	const GLfloat BG_Color[] = { 0.275f, 0.784f, 0.827f, 0.0f };
-	glClearColor(BG_Color[0], BG_Color[1], BG_Color[2], BG_Color[3]);
+	initializeLighting();
 }
 
 void Render::renderPlane() {
@@ -69,6 +76,9 @@ void Render::prepareMatrixProjection() {
 }
 
 void Render::DrawGameBoard() {
+	const GLfloat BG_Color[] = { 0.275f, 0.784f, 0.827f, 0.0f };
+	glClearColor(BG_Color[0], BG_Color[1], BG_Color[2], BG_Color[3]);
+
 	enableGLCapabilities();
 	prepareMatrixProjection();
 	prepareModelView();
@@ -80,9 +90,16 @@ void Render::DrawGameBoard() {
 	glutSwapBuffers();
 }
 
+void Render::initializeCallbacks() {
+	glutDisplayFunc(Menu::DisplayFunc);
+	glutKeyboardFunc(Menu::Keyboard);
+	glutReshapeFunc(reshapeFunc);
+}
+
+
 void Render::Run(int argc, char** argv) {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_MULTISAMPLE);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	 
     POS_X = (glutGet(GLUT_SCREEN_WIDTH) - WIDTH) >> 1;
 	POS_Y = (glutGet(GLUT_SCREEN_HEIGHT) - HEIGHT) >> 1;
@@ -91,9 +108,7 @@ void Render::Run(int argc, char** argv) {
 	glutInitWindowSize(WIDTH, HEIGHT);
 	glutCreateWindow("Snake3D");
 	 
-	// callbacks
-	glutDisplayFunc(Menu::DisplayFunc);
-	glutKeyboardFunc(Menu::Keyboard);
-	glutReshapeFunc(reshapeFunc);
+	initializeCallbacks();
+
 	glutMainLoop();
 }
