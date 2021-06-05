@@ -1,12 +1,17 @@
 #include "Render.h"
 #include "../game/Snake.h"
 
+<<<<<<< HEAD
 const int ::Render::HEIGHT = 700;
+=======
+const int ::Render::HEIGHT = 800;
+>>>>>>> main
 const int ::Render::WIDTH = 600;
 
 int ::Render::POS_X = 0;
 int ::Render::POS_Y = 0;
   
+<<<<<<< HEAD
 void Render::reshapeFunc(int width, int height) {
 	glutPositionWindow(POS_X, POS_Y);
 	glutReshapeWindow(WIDTH, HEIGHT);
@@ -22,6 +27,11 @@ void Render::initializeLighting() {
 
 void Render::enableGLCapabilities() {
 	initializeLighting();
+=======
+void Render::enableGLCapabilities() {
+	const GLfloat BG_Color[] = { 0.275f, 0.784f, 0.827f, 0.0f };
+	glClearColor(BG_Color[0], BG_Color[1], BG_Color[2], BG_Color[3]);
+>>>>>>> main
 }
 
 void Render::renderPlane() {
@@ -76,9 +86,12 @@ void Render::prepareMatrixProjection() {
 }
 
 void Render::DrawGameBoard() {
+<<<<<<< HEAD
 	const GLfloat BG_Color[] = { 0.275f, 0.784f, 0.827f, 0.0f };
 	glClearColor(BG_Color[0], BG_Color[1], BG_Color[2], BG_Color[3]);
 
+=======
+>>>>>>> main
 	enableGLCapabilities();
 	prepareMatrixProjection();
 	prepareModelView();
@@ -90,6 +103,7 @@ void Render::DrawGameBoard() {
 	glutSwapBuffers();
 }
 
+<<<<<<< HEAD
 void Render::initializeCallbacks() {
 	glutDisplayFunc(Menu::DisplayFunc);
 	glutKeyboardFunc(Menu::Keyboard);
@@ -100,6 +114,11 @@ void Render::initializeCallbacks() {
 void Render::Run(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
+=======
+void Render::Run(int argc, char** argv) {
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_MULTISAMPLE);
+>>>>>>> main
 	 
     POS_X = (glutGet(GLUT_SCREEN_WIDTH) - WIDTH) >> 1;
 	POS_Y = (glutGet(GLUT_SCREEN_HEIGHT) - HEIGHT) >> 1;
@@ -108,7 +127,13 @@ void Render::Run(int argc, char** argv) {
 	glutInitWindowSize(WIDTH, HEIGHT);
 	glutCreateWindow("Snake3D");
 	 
+<<<<<<< HEAD
 	initializeCallbacks();
 
+=======
+	// callbacks
+	glutDisplayFunc(Menu::DisplayFunc);
+	glutKeyboardFunc(Menu::Keyboard);
+>>>>>>> main
 	glutMainLoop();
 }
