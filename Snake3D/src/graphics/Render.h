@@ -14,9 +14,12 @@ private:
 	void static renderPlane();
 	void static renderSnake();
 
+	void static initializeCallbacks();
+	void static initializeLighting();
+
 	void static prepareMatrixProjection();
 	void static prepareModelView();
-
+	void static reshapeFunc(int, int);
 	void static enableGLCapabilities();
 
 public:

@@ -1,24 +1,2 @@
-﻿  Menu.cpp
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(18,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(19,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(20,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(21,31): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(25,31): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(26,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(27,31): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(28,32): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(34,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(35,31): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(36,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(37,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(38,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(39,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(40,31): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(41,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(44,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(53,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Snake3D\src\graphics\Menu.cpp(60,31): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  Render.cpp
-  main.cpp
-  Generating Code...
-  Snake3D.vcxproj -> C:\Users\annag\OneDrive\Pulpit\Repositories\Snake3D\Debug\Snake3D.exe
+﻿  Render.cpp
+  Snake3D.vcxproj -> C:\Users\annag\OneDrive\Pulpit\Grafika\Snake3D\Debug\Snake3D.exe
