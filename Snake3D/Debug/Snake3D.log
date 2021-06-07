@@ -1,2 +1,11 @@
-﻿  Render.cpp
-  Snake3D.vcxproj -> C:\Users\annag\OneDrive\Pulpit\Grafika\Snake3D\Debug\Snake3D.exe
+﻿  Obstacle.cpp
+C:\Users\Agniesia\source\repos\Snake3Daaa\Snake3D\src\game\Obstacle.h(17,19): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Agniesia\source\repos\Snake3Daaa\Snake3D\src\game\Obstacle.h(18,21): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+  Render.cpp
+C:\Users\Agniesia\source\repos\Snake3Daaa\Snake3D\src\game\Food.h(15,13): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\Agniesia\source\repos\Snake3Daaa\Snake3D\src\game\Food.h(17,19): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Agniesia\source\repos\Snake3Daaa\Snake3D\src\game\Food.h(18,21): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\Agniesia\source\repos\Snake3Daaa\Snake3D\src\game\Obstacle.h(17,19): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Agniesia\source\repos\Snake3Daaa\Snake3D\src\game\Obstacle.h(18,21): warning C4244: "argument": konwersja z "double" do "float", możliwa utrata danych
+  Generowanie kodu...
+  Snake3D.vcxproj -> C:\Users\Agniesia\source\repos\Snake3Daaa\Debug\Snake3D.exe

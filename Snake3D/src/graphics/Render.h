@@ -13,6 +13,8 @@ private:
  
 	void static renderPlane();
 	void static renderSnake();
+	void static renderFood();
+	void static renderObstacle();
 
 	void static initializeCallbacks();
 	void static initializeLighting();

@@ -1,5 +1,7 @@
 #include "Render.h"
 #include "../game/Snake.h"
+#include "../game/Food.h"
+#include "../game/Obstacle.h"
 
 const int ::Render::HEIGHT = 700;
 const int ::Render::WIDTH = 600;
@@ -52,6 +54,44 @@ void Render::renderSnake() {
 	delete s; 
 }
 
+void Render::renderFood() {
+	const float FOOD_COLOR[] = { 1.0f, 1.0f, 0.0f };
+
+	Food* s = new Food(); // todo: change to param 
+	glColor3fv(FOOD_COLOR);
+	for (int i = 0; i < s->GetLength(); i++) {
+		glLoadIdentity();
+
+		auto x = s->GetBodyPart().GetXPos();
+		auto y = s->GetBodyPart().GetYPos();
+		auto z = s->GetBodyPart().GetZPos();
+
+		glTranslatef(x, y, z);
+		glutSolidCube(1.0);
+	}
+
+	delete s;
+}
+
+void Render::renderObstacle() {
+	const float OBSTACLE_COLOR[] = { 1.0f, 0.0f, 1.0f };
+
+	Obstacle* s = new Obstacle(); // todo: change to param 
+	glColor3fv(OBSTACLE_COLOR);
+	for (int i = 0; i < s->GetLength(); i++) {
+		glLoadIdentity();
+
+		auto x = s->GetBodyPart().GetXPos();
+		auto y = s->GetBodyPart().GetYPos();
+		auto z = s->GetBodyPart().GetZPos();
+
+		glTranslatef(x, y, z);
+		glutSolidCube(1.0);
+	}
+
+	delete s;
+}
+
 void Render::prepareModelView() {
 	const float xAngle = 16;
 	const float yAngle = 0;
@@ -86,6 +126,9 @@ void Render::DrawGameBoard() {
  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	renderPlane();
 	renderSnake();
+	renderFood();
+	renderObstacle();
+
 	glLoadIdentity();
 	glutSwapBuffers();
 }
