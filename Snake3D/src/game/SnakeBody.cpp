@@ -1,5 +1,6 @@
 #include "SnakeBody.h"
 
+ 
 void SnakeBody::SetZPos(float z) {
 	zPos = z;
 }
@@ -12,6 +13,11 @@ void SnakeBody::SetXPos(float x) {
 	xPos = x;
 }
 
+void SnakeBody::SetDirection(char direct)
+{
+	direction = direct;
+}
+
 float SnakeBody::GetZPos() {
 	return zPos;
 }
@@ -22,4 +28,9 @@ float SnakeBody::GetYPos() {
 
 float SnakeBody::GetXPos() {
 	return xPos;
+}
+
+char SnakeBody::GetDirection()
+{
+	return direction;
 }

@@ -4,7 +4,12 @@
 bool Menu::gameStart = false; 
 
 void Menu::DisplayFunc() {
-    return gameStart ? Render::DrawGameBoard() : drawMenu();
+    if (gameStart) 
+        Render::DrawGameBoard();
+    else
+        drawMenu();
+
+    glutPostRedisplay();
 }
 
 void Menu::drawMenu()
@@ -74,11 +79,9 @@ void Menu::Keyboard(unsigned char key, int x, int y)
     case 27:
         exit(0);
         break;
-
     case 'N':
     case 'n':
-        gameStart = true; 
-        DisplayFunc();
-        break;
+        if (!gameStart) 
+            gameStart = true;
     }
 }
