@@ -1,24 +1,21 @@
 #pragma once
 #include "SnakeBody.h"
+#include "freeglut.h"
 
-class Snake
+#include <iostream>       // std::cout, std::endl
+#include <thread>         // std::this_thread::sleep_for
+#include <chrono>         // std::chrono::seconds
+
+static class Snake
 {
 private:
-	SnakeBody body[400]; // max lenght of snake body 
-	int length = 1;
-
+	static SnakeBody *body; // max lenght of snake body 
+	static int length;
 public:
-	Snake() {
-		body[0].SetXPos(10);
-		body[1].SetXPos(9);
-
-		for (int i = 0; i <= length; i++) {
-			body[i].SetYPos(10);
-			body[i].SetZPos(19);
-		}
-	}
-
-	int GetLength();
-	void SetLength(int);
-	SnakeBody GetBodyPart(int);
+	static void initSnakeBody();
+	static int GetLength();
+	static void SetLength(int);
+	static void Control_System();
+	static void specialKeys(int key, int x, int y);
+	static SnakeBody GetBodyPart(int);
 };

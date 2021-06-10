@@ -6,7 +6,7 @@ const int ::Render::WIDTH = 600;
 
 int ::Render::POS_X = 0;
 int ::Render::POS_Y = 0;
-  
+
 void Render::reshapeFunc(int width, int height) {
 	glutPositionWindow(POS_X, POS_Y);
 	glutReshapeWindow(WIDTH, HEIGHT);
@@ -35,21 +35,21 @@ void Render::renderPlane() {
 void Render::renderSnake() {
 	const float SNAKE_BODY_COLOR[] = { 0.800f, 0.200f, 0.280f };
 	const float SNAKE_HEAD_COLOR[] = { 1.000f, 0.190f, 0.210f };
-
-	Snake* s = new Snake(); // todo: change to param 
+	
+	Snake::Control_System();
 	glColor3fv(SNAKE_BODY_COLOR);
-	for (int i = 0; i < s->GetLength(); i++) {
+	for (int i = 0; i < Snake::GetLength(); i++) {
 		glLoadIdentity();
 
-		auto x = s->GetBodyPart(i).GetXPos() - 9.5f;
-		auto y = s->GetBodyPart(i).GetYPos() - 9.5f;
-		auto z = s->GetBodyPart(i).GetZPos() - 9.5f;
+		
+		auto x = Snake::GetBodyPart(i).GetXPos() - 9.5f;
+		auto y = Snake::GetBodyPart(i).GetYPos() - 9.5f;
+		auto z = Snake::GetBodyPart(i).GetZPos() - 9.5f;
 
 		glTranslatef(x, y, z);
 		glutSolidCube(1.0);
 	}
 	
-	delete s; 
 }
 
 void Render::prepareModelView() {
@@ -86,13 +86,15 @@ void Render::DrawGameBoard() {
  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	renderPlane();
 	renderSnake();
+	
 	glLoadIdentity();
 	glutSwapBuffers();
 }
 
 void Render::initializeCallbacks() {
-	glutDisplayFunc(Menu::DisplayFunc);
 	glutKeyboardFunc(Menu::Keyboard);
+	glutDisplayFunc(Menu::DisplayFunc);
+	glutSpecialFunc(Snake::specialKeys); 
 	glutReshapeFunc(reshapeFunc);
 }
 
@@ -107,7 +109,7 @@ void Render::Run(int argc, char** argv) {
 	glutInitWindowPosition(POS_X, POS_Y);
 	glutInitWindowSize(WIDTH, HEIGHT);
 	glutCreateWindow("Snake3D");
-
+	Snake::initSnakeBody(); // todo do przeniesniea w inne miejsce..
 	initializeCallbacks();
 	glutMainLoop();
 }
