@@ -145,6 +145,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\game\ObstacleBody.cpp" />
+    <ClCompile Include="src\game\Obstacle.cpp" />
+    <ClCompile Include="src\game\FoodBody.cpp" />
+    <ClCompile Include="src\game\Food.cpp" />
     <ClCompile Include="src\graphics\Menu.cpp" />
     <ClCompile Include="src\graphics\Render.cpp" />
     <ClCompile Include="src\game\SnakeBody.cpp" />
@@ -152,6 +156,10 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game\ObstacleBody.h" />
+    <ClInclude Include="src\game\Obstacle.h" />
+    <ClInclude Include="src\game\FoodBody.h" />
+    <ClInclude Include="src\game\Food.h" />
     <ClInclude Include="src\graphics\Menu.h" />
     <ClInclude Include="src\graphics\Render.h" />
     <ClInclude Include="src\game\SnakeBody.h" />
