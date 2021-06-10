@@ -1,2 +1,3 @@
-﻿  Render.cpp
-  Snake3D.vcxproj -> C:\Users\annag\OneDrive\Pulpit\Grafika\Snake3D\Debug\Snake3D.exe
+﻿  Snake.cpp
+C:\Users\Mateusz\Desktop\SNAKE_\Snake3D\Snake3D\src\game\Snake.h(21,2): warning C4091: "static ": zignorowano na lewo od "Snake" podczas gdy brak deklaracji zmiennej
+  Snake3D.vcxproj -> C:\Users\Mateusz\Desktop\SNAKE_\Snake3D\Debug\Snake3D.exe

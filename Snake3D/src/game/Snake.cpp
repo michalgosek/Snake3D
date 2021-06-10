@@ -63,30 +63,34 @@ SnakeBody Snake::GetBodyPart(int index) {
 
     if (body[0].GetDirection() == 'N')
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         y += 1;
         body[0].SetYPos(y);
+        body[0].SetXPos(x);
     }
 
     if (body[0].GetDirection() == 'S')
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         y -= 1;
         body[0].SetYPos(y);
+        body[0].SetXPos(x);
     }
 	
     if (body[0].GetDirection() == 'R')
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         x += 1;
-        body[0].SetYPos(x);
+        body[0].SetXPos(x);
+        body[0].SetYPos(y);
     }
         
     if (body[0].GetDirection() == 'L')
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         x -= 1;
-        body[0].SetYPos(x);
+        body[0].SetXPos(x);
+        body[0].SetYPos(y);
     }
         
 }
