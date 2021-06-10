@@ -1,9 +1,0 @@
-﻿  Menu.cpp
-C:\Users\Agniesia\source\repos\Snake3Daaa\Snake3D\src\graphics\Menu.h(3,10): fatal error C1083: Nie można otworzyć pliku dołącz: 'freeglut.h': No such file or directory
-  Render.cpp
-C:\Users\Agniesia\source\repos\Snake3Daaa\Snake3D\src\graphics\Render.h(3,10): fatal error C1083: Nie można otworzyć pliku dołącz: 'freeglut.h': No such file or directory
-  SnakeBody.cpp
-  Snake.cpp
-  main.cpp
-C:\Users\Agniesia\source\repos\Snake3Daaa\Snake3D\src\graphics\Render.h(3,10): fatal error C1083: Nie można otworzyć pliku dołącz: 'freeglut.h': No such file or directory
-  Generowanie kodu...
