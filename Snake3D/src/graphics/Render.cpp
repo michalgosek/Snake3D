@@ -164,6 +164,19 @@ void Render::checkInteractionSnakeWithObstancle() {
 
 	}
 }
+
+void Render::renderPoints() {
+	glRasterPos2f(-4, 7);
+
+	std::string tmp = std::to_string(points);
+	std::string tmp1 = "Liczba punktow: " + tmp;
+	char const* num_char = tmp1.c_str();
+	int len = (int)strlen(num_char);
+	for (int i = 0; i < len; i++) {
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, num_char[i]);
+	}
+
+}
 void Render::DrawGameBoard() {
 	enableGLCapabilities();
 	prepareMatrixProjection();
@@ -179,6 +192,7 @@ void Render::DrawGameBoard() {
 	renderObstacle(x_pos_ob_1, y_pos_ob_1);
 	renderObstacle(x_pos_ob_2, y_pos_ob_2);
 	renderObstacle(x_pos_ob_3, y_pos_ob_3);
+	renderPoints();
 	glLoadIdentity();
 	glutSwapBuffers();
 }

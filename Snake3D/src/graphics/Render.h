@@ -12,6 +12,7 @@ private:
 	static int POS_Y;
  
 	void static addPoint();
+	void static renderPoints();
 	void static renderPlane();
 	void static renderSnake();
 	void static renderFood(double, double);
