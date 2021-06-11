@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 class Food
 {
 private:
@@ -11,11 +10,9 @@ private:
 	int length = 1;
 
 public:
-	Food() {
-		srand(time(NULL));
-
-		body.SetXPos(-6 + (rand() % 12));
-		body.SetYPos(-2.5 + (rand() % 12));
+	Food(double x, double y) {
+		body.SetXPos(x);
+		body.SetYPos(y);
 		body.SetZPos(19);
 	}
 

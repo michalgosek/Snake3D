@@ -5,7 +5,19 @@
 
 const int ::Render::HEIGHT = 700;
 const int ::Render::WIDTH = 600;
+double x_pos_food = (-6 + (rand() % 12));
+double y_pos_food = (-2.5 + (rand() % 12));
 
+const double x_pos_ob_1 = (2);
+const double y_pos_ob_1 = (-2);
+
+const double x_pos_ob_2 = (1);
+const double y_pos_ob_2 = (4);
+
+const double x_pos_ob_3 = (6);
+const double y_pos_ob_3 = (6);
+
+int points = 0;
 int ::Render::POS_X = 0;
 int ::Render::POS_Y = 0;
 
@@ -44,9 +56,9 @@ void Render::renderSnake() {
 		glLoadIdentity();
 
 		
-		auto x = Snake::GetBodyPart(i).GetXPos() - 9.5f;
-		auto y = Snake::GetBodyPart(i).GetYPos() - 9.5f;
-		auto z = Snake::GetBodyPart(i).GetZPos() - 9.5f;
+		auto x = Snake::GetBodyPart(i).GetXPos();// -9.5f;
+		auto y = Snake::GetBodyPart(i).GetYPos();// -9.5f;
+		auto z = Snake::GetBodyPart(i).GetZPos();// -9.5f;
 
 		glTranslatef(x, y, z);
 		glutSolidCube(1.0);
@@ -54,10 +66,10 @@ void Render::renderSnake() {
 	
 }
 
-void Render::renderFood() {
+void Render::renderFood(double x_pos, double y_pos) {
 	const float FOOD_COLOR[] = { 1.0f, 1.0f, 0.0f };
 
-	Food* s = new Food(); // todo: change to param 
+	Food* s = new Food(x_pos, y_pos); // todo: change to param 
 	glColor3fv(FOOD_COLOR);
 	for (int i = 0; i < s->GetLength(); i++) {
 		glLoadIdentity();
@@ -70,13 +82,13 @@ void Render::renderFood() {
 		glutSolidCube(1.0);
 	}
 
-	delete s;
+	 delete s;
 }
 
-void Render::renderObstacle() {
+void Render::renderObstacle(double x_pos, double y_pos) {
 	const float OBSTACLE_COLOR[] = { 1.0f, 0.0f, 1.0f };
 
-	Obstacle* s = new Obstacle(); // todo: change to param 
+	Obstacle* s = new Obstacle(x_pos, y_pos); // todo: change to param 
 	glColor3fv(OBSTACLE_COLOR);
 	for (int i = 0; i < s->GetLength(); i++) {
 		glLoadIdentity();
@@ -118,6 +130,40 @@ void Render::prepareMatrixProjection() {
 	gluPerspective(fovY, aspect, zNear, zFar);
 }
 
+void Render::addPoint() {
+	points++;
+}
+void Render::checkInteractionSnakeWithFood() {
+	if (x_pos_food + 1 > Snake::GetBodyPart(0).GetXPos() &&
+		x_pos_food - 1 < Snake::GetBodyPart(0).GetXPos() &&
+		y_pos_food + 1 > Snake::GetBodyPart(0).GetYPos() &&
+		y_pos_food - 1 < Snake::GetBodyPart(0).GetYPos()) {
+		
+		srand(time(NULL));
+		x_pos_food = (-6) + (rand() % 12);
+		y_pos_food = (-2.5) + (rand() % 12);
+		addPoint();
+	}
+}
+
+void Render::checkInteractionSnakeWithObstancle() {
+	if((x_pos_ob_1 + 1 > Snake::GetBodyPart(0).GetXPos() &&
+		x_pos_ob_1 - 1 < Snake::GetBodyPart(0).GetXPos() &&
+		y_pos_ob_1 + 1 > Snake::GetBodyPart(0).GetYPos() &&
+		y_pos_ob_1 - 1 < Snake::GetBodyPart(0).GetYPos()) ||
+		(x_pos_ob_2 + 1 > Snake::GetBodyPart(0).GetXPos() &&
+		x_pos_ob_2 - 1 < Snake::GetBodyPart(0).GetXPos() &&
+		y_pos_ob_2 + 1 > Snake::GetBodyPart(0).GetYPos() &&
+		y_pos_ob_2 - 1 < Snake::GetBodyPart(0).GetYPos()) ||
+		(x_pos_ob_3 + 1 > Snake::GetBodyPart(0).GetXPos() &&
+		x_pos_ob_3 - 1 < Snake::GetBodyPart(0).GetXPos() &&
+		y_pos_ob_3 + 1 > Snake::GetBodyPart(0).GetYPos() &&
+		y_pos_ob_3 - 1 < Snake::GetBodyPart(0).GetYPos())){
+
+		Menu::gameStart = false;
+
+	}
+}
 void Render::DrawGameBoard() {
 	enableGLCapabilities();
 	prepareMatrixProjection();
@@ -126,8 +172,13 @@ void Render::DrawGameBoard() {
  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	renderPlane();
 	renderSnake();
-	renderFood();
-	renderObstacle();
+
+	checkInteractionSnakeWithFood();
+	checkInteractionSnakeWithObstancle();
+	renderFood(x_pos_food, y_pos_food);
+	renderObstacle(x_pos_ob_1, y_pos_ob_1);
+	renderObstacle(x_pos_ob_2, y_pos_ob_2);
+	renderObstacle(x_pos_ob_3, y_pos_ob_3);
 	glLoadIdentity();
 	glutSwapBuffers();
 }

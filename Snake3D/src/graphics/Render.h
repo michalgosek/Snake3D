@@ -11,11 +11,13 @@ private:
 	static int POS_X;
 	static int POS_Y;
  
+	void static addPoint();
 	void static renderPlane();
 	void static renderSnake();
-	void static renderFood();
-	void static renderObstacle();
-
+	void static renderFood(double, double);
+	void static renderObstacle(double, double);
+	void static checkInteractionSnakeWithFood();
+	void static checkInteractionSnakeWithObstancle();
 	void static initializeCallbacks();
 	void static initializeLighting();
 

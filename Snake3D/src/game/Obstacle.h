@@ -11,11 +11,11 @@ private:
 	int length = 1;
 
 public:
-	Obstacle() {
+	Obstacle(double x, double y) {
 	//	srand(time(NULL));
 
-		body.SetXPos(-6 + (rand() % 12));
-		body.SetYPos(-2.5 + (rand() % 12));
+		body.SetXPos(x);
+		body.SetYPos(y);
 		body.SetZPos(19);
 	}
 
