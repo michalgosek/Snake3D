@@ -1,16 +1,21 @@
 #include "Snake.h"
 
 int Snake::length = 1;
+bool Snake::load = false;
 SnakeBody* Snake::body = new SnakeBody[400];
 
 void Snake::initSnakeBody() {
-    body[0].SetDirection('N');
-    body[0].SetXPos(0);
+    
 
-    for (int i = 0; i <= length; i++) {
-        body[i].SetYPos(0);
-        body[i].SetZPos(19);
-    }
+        body[0].SetDirection('N');
+        body[0].SetXPos(0);
+
+        for (int i = 0; i <= length; i++) {
+            body[i].SetYPos(0);
+            body[i].SetZPos(19);
+        }
+    
+   
 }
 
 
@@ -94,3 +99,5 @@ SnakeBody Snake::GetBodyPart(int index) {
     }
         
 }
+
+ 

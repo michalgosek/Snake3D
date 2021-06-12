@@ -161,6 +161,7 @@ void Render::checkInteractionSnakeWithObstancle() {
 		y_pos_ob_3 - 1 < Snake::GetBodyPart(0).GetYPos())){
 
 		Menu::gameStart = false;
+		
 
 	}
 }
@@ -199,6 +200,7 @@ void Render::DrawGameBoard() {
 
 void Render::initializeCallbacks() {
 	glutKeyboardFunc(Menu::Keyboard);
+
 	glutDisplayFunc(Menu::DisplayFunc);
 	glutSpecialFunc(Snake::specialKeys); 
 	glutReshapeFunc(reshapeFunc);
