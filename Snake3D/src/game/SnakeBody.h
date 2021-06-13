@@ -2,9 +2,9 @@
 class SnakeBody
 {
 private:
-	float xPos;
-	float yPos;
-	float zPos;
+	float xPos = 0;
+	float yPos = 0;
+	float zPos = 19;
 	char direction;
 
 public:
