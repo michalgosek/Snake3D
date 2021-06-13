@@ -23,5 +23,7 @@ public:
 	static void SetLength(int);
 	static void Control_System();
 	static void specialKeys(int key, int x, int y);
+	static void updateSnake();
 	static SnakeBody GetBodyPart(int);
+	static void checkKeyNotification();
 };

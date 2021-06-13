@@ -143,6 +143,7 @@ void Render::checkInteractionSnakeWithFood() {
 		x_pos_food = (-6) + (rand() % 12);
 		y_pos_food = (-2.5) + (rand() % 12);
 		addPoint();
+		Snake::updateSnake();
 	}
 }
 
@@ -185,16 +186,17 @@ void Render::DrawGameBoard() {
 
  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	renderPlane();
-	renderSnake();
 
 	checkInteractionSnakeWithFood();
 	checkInteractionSnakeWithObstancle();
+	renderSnake();
 	renderFood(x_pos_food, y_pos_food);
 	renderObstacle(x_pos_ob_1, y_pos_ob_1);
 	renderObstacle(x_pos_ob_2, y_pos_ob_2);
 	renderObstacle(x_pos_ob_3, y_pos_ob_3);
 	renderPoints();
 	glLoadIdentity();
+	Snake::checkKeyNotification();
 	glutSwapBuffers();
 }
 

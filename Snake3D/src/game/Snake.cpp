@@ -1,24 +1,52 @@
 #include "Snake.h"
+#include <vector>
 
 int Snake::length = 1;
 bool Snake::load = false;
-SnakeBody* Snake::body = new SnakeBody[400];
+SnakeBody* Snake::body = new SnakeBody[100];
 
 void Snake::initSnakeBody() {
-    
 
-        body[0].SetDirection('N');
-        body[0].SetXPos(0);
-
-        for (int i = 0; i <= length; i++) {
-            body[i].SetYPos(0);
-            body[i].SetZPos(19);
+        for (int i = 0; i <= 100; i++) {
+            body[i].SetDirection('N');
+            body[i].SetXPos(body[i].GetXPos());
+            body[i].SetYPos(body[i].GetYPos());
+            body[i].SetZPos(body[i].GetZPos());
         }
     
    
 }
 
 
+void Snake::updateSnake() {
+    int snakeSize = GetLength();
+    snakeSize++;
+    SetLength(snakeSize);
+
+    if (body[snakeSize - 2].GetDirection() == 'N') {
+        body[snakeSize - 1].SetXPos(body[snakeSize - 2].GetXPos());
+        body[snakeSize - 1].SetYPos(body[snakeSize - 2].GetYPos() - 1);
+        body[snakeSize - 1].SetZPos(body[snakeSize - 2].GetZPos());
+        body[snakeSize - 1].SetDirection(body[snakeSize - 2].GetDirection());
+    }else if(body[snakeSize - 2].GetDirection() == 'S') {
+        body[snakeSize - 1].SetXPos(body[snakeSize - 2].GetXPos());
+        body[snakeSize - 1].SetYPos(body[snakeSize - 2].GetYPos() + 1);
+        body[snakeSize - 1].SetZPos(body[snakeSize - 2].GetZPos());
+        body[snakeSize - 1].SetDirection(body[snakeSize - 2].GetDirection());
+    }else if(body[snakeSize - 2].GetDirection() == 'L'){
+        body[snakeSize - 1].SetXPos(body[snakeSize - 2].GetXPos() + 1);
+        body[snakeSize - 1].SetYPos(body[snakeSize - 2].GetYPos());
+        body[snakeSize - 1].SetZPos(body[snakeSize - 2].GetZPos());
+        body[snakeSize - 1].SetDirection(body[snakeSize - 2].GetDirection());
+    }
+    else if (body[snakeSize - 2].GetDirection() == 'R') {
+        body[snakeSize - 1].SetXPos(body[snakeSize - 2].GetXPos() - 1);
+        body[snakeSize - 1].SetYPos(body[snakeSize - 2].GetYPos());
+        body[snakeSize - 1].SetZPos(body[snakeSize - 2].GetZPos());
+        body[snakeSize - 1].SetDirection(body[snakeSize - 2].GetDirection());
+    }
+
+}
 void Snake::SetLength(int l) {
 	length = l;
 }
@@ -61,43 +89,54 @@ SnakeBody Snake::GetBodyPart(int index) {
     }
 }
 
+ void Snake::checkKeyNotification() {
+     std::vector <char> tab;
+
+     for (int i = 0; i <= length; i++) {
+         tab.push_back(body[i].GetDirection());
+     }
+     for (int j = 1; j <= length; j++) {
+           body[j].SetDirection(tab[j - 1]);
+     }
+ }
  void Snake::Control_System()
 {
-	float x = body[0].GetXPos();
-    float y = body[0].GetYPos();
+     for (int i = 0; i <= length; i++) {
+         float x = body[i].GetXPos();
+         float y = body[i].GetYPos();
 
-    if (body[0].GetDirection() == 'N')
-    {
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        y += 1;
-        body[0].SetYPos(y);
-        body[0].SetXPos(x);
-    }
+         if (body[i].GetDirection() == 'N')
+         {
+             std::this_thread::sleep_for(std::chrono::milliseconds(200/length));
+             y += 1;
+             body[i].SetYPos(y);
+             body[i].SetXPos(x);
+         }
 
-    if (body[0].GetDirection() == 'S')
-    {
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        y -= 1;
-        body[0].SetYPos(y);
-        body[0].SetXPos(x);
-    }
-	
-    if (body[0].GetDirection() == 'R')
-    {
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        x += 1;
-        body[0].SetXPos(x);
-        body[0].SetYPos(y);
-    }
-        
-    if (body[0].GetDirection() == 'L')
-    {
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        x -= 1;
-        body[0].SetXPos(x);
-        body[0].SetYPos(y);
-    }
-        
+         if (body[i].GetDirection() == 'S')
+         {
+             std::this_thread::sleep_for(std::chrono::milliseconds(200 / length));
+             y -= 1;
+             body[i].SetYPos(y);
+             body[i].SetXPos(x);
+         }
+
+         if (body[i].GetDirection() == 'R')
+         {
+             std::this_thread::sleep_for(std::chrono::milliseconds(200 / length));
+             x += 1;
+             body[i].SetXPos(x);
+             body[i].SetYPos(y);
+         }
+
+         if (body[i].GetDirection() == 'L')
+         {
+             std::this_thread::sleep_for(std::chrono::milliseconds(200 / length));
+             x -= 1;
+             body[i].SetXPos(x);
+             body[i].SetYPos(y);
+         }
+     }
 }
 
  
