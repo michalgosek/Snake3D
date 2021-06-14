@@ -15,6 +15,7 @@ public:
 	static bool gameStart;
 	static bool gameBreak;
 	static void DisplayFunc();
+	static void prepareMatrixProjection();
 	static void Keyboard(unsigned char key, int x, int y);
 
 };

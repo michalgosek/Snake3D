@@ -24,13 +24,15 @@ private:
 
 	void static prepareMatrixProjection();
 	void static prepareModelView();
+	void static prepareMatrixProjectionWithAngle(float);
 	void static reshapeFunc(int, int);
 	void static enableGLCapabilities();
 
 public:
 	void static Run(int argc, char** argv);
 	void static DrawGameBoard();
-
+	void static changeAngleX(float);
+	void static changeAngleY(float);
 	void operator=(const Render&) = delete; // not be assignable
 	Render(Render&) = delete; // not clonable 
 };

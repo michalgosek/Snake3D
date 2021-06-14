@@ -18,6 +18,12 @@ void SnakeBody::SetDirection(char direct)
 	direction = direct;
 }
 
+
+void SnakeBody::SetPlane(int p)
+{
+	plane = p;
+}
+
 float SnakeBody::GetZPos() {
 	return zPos;
 }
@@ -33,4 +39,9 @@ float SnakeBody::GetXPos() {
 char SnakeBody::GetDirection()
 {
 	return direction;
+}
+
+int SnakeBody::GetPlane()
+{
+	return plane;
 }

@@ -17,6 +17,10 @@ const double y_pos_ob_2 = (4);
 const double x_pos_ob_3 = (6);
 const double y_pos_ob_3 = (6);
 
+float xAngle = 0;
+float yAngle = 0;
+float zAngle = 0;
+
 int points = 0;
 int ::Render::POS_X = 0;
 int ::Render::POS_Y = 0;
@@ -63,7 +67,6 @@ void Render::renderSnake() {
 		glTranslatef(x, y, z);
 		glutSolidCube(1.0);
 	}
-	
 }
 
 void Render::renderFood(double x_pos, double y_pos) {
@@ -105,7 +108,17 @@ void Render::renderObstacle(double x_pos, double y_pos) {
 }
 
 void Render::prepareModelView() {
-	const float xAngle = 16;
+	std::cout << xAngle;
+	// transform objects inside the viewspace 
+	glTranslatef(0.0f, 0.0f, -100.0f);
+	glRotatef(xAngle, 1.0f, 0.0f, 0.0f);
+	glRotatef(yAngle, 0.0f, 1.0f, 0.0f);
+	glRotatef(zAngle, 0.0f, 0.0f, 1.0f);
+	glMatrixMode(GL_MODELVIEW);
+}
+
+void Render::prepareMatrixProjectionWithAngle(float x) {
+	const float xAngle = x;
 	const float yAngle = 0;
 	const float zAngle = 0;
 
@@ -145,6 +158,13 @@ void Render::checkInteractionSnakeWithFood() {
 		addPoint();
 		Snake::updateSnake();
 	}
+	
+}
+void Render::changeAngleX(float x) {
+	xAngle += x;
+}
+void Render::changeAngleY(float y) {
+	yAngle += y;
 }
 
 void Render::checkInteractionSnakeWithObstancle() {
@@ -213,7 +233,7 @@ void Render::Run(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	 
-  POS_X = (glutGet(GLUT_SCREEN_WIDTH) - WIDTH) >> 1;
+	POS_X = (glutGet(GLUT_SCREEN_WIDTH) - WIDTH) >> 1;
 	POS_Y = (glutGet(GLUT_SCREEN_HEIGHT) - HEIGHT) >> 1;
 
 	glutInitWindowPosition(POS_X, POS_Y);
