@@ -49,7 +49,11 @@ void Snake::updateSnake() {
 
 }
 void Snake::SetLength(int l) {
-	length = l;
+    length = l;
+
+    if (length == 100) {
+        Menu::gameStart = false;
+    }
 }
 
 bool Snake::checkIntersectionWithSelf()
