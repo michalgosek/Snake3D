@@ -170,5 +170,3 @@ SnakeBody Snake::GetBodyPart(int index) {
          }
      }
 }
-
- 
