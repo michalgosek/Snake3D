@@ -23,8 +23,23 @@ void Menu::DisplayFunc() {
     glutPostRedisplay();
 }
 
+void Menu::prepareMatrixProjection() {
+    const float fovY = 90;
+    const float aspect = 1;
+    const float zNear = 1;
+    const float zFar = 1;
+
+    // render the visible viewspace 
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glViewport(0, 0, 600, 700);
+    gluPerspective(fovY, aspect, zNear, zFar);
+}
+
+
 void Menu::drawMenu()
 {
+    prepareMatrixProjection();
     //rectangles
     float leftx_r, rightx_r;
 
@@ -43,7 +58,7 @@ void Menu::drawMenu()
 
     float z;
 
-    z = 0.0;
+    z = 0.5;
 
     leftx_r = -0.4;
     rightx_r = 0.4;
@@ -136,10 +151,12 @@ void Menu::drawMenu()
 
     glFlush();
     glutSwapBuffers();
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000 ));
 }
 
 void Menu::drawQuitMenu()
 {
+    prepareMatrixProjection();
     //rectangles
     float topy, bottomy;
 
@@ -155,7 +172,7 @@ void Menu::drawQuitMenu()
 
     float z;
 
-    z = 0.0;
+    z = 0.5;
 
     leftx_f = -0.8;
     rightx_f = -0.1;
@@ -235,6 +252,7 @@ void Menu::drawQuitMenu()
 
 void Menu::Keyboard(unsigned char key, int x, int y)
 {
+
     char key2;
     switch (key)
     {

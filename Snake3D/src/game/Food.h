@@ -13,7 +13,7 @@ public:
 	Food(double x, double y) {
 		body.SetXPos(x);
 		body.SetYPos(y);
-		body.SetZPos(19);
+		body.SetZPos(8);
 	}
 
 	int GetLength();

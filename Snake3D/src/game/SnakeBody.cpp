@@ -5,6 +5,7 @@ void SnakeBody::SetZPos(float z) {
 	zPos = z;
 }
 
+
 void SnakeBody::SetYPos(float y) {
 	yPos = y;
 }
@@ -17,6 +18,7 @@ void SnakeBody::SetDirection(char direct)
 {
 	direction = direct;
 }
+
 
 float SnakeBody::GetZPos() {
 	return zPos;
