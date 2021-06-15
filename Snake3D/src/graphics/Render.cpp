@@ -160,6 +160,11 @@ void Render::checkInteractionSnakeWithFood() {
 		srand(time(NULL));
 		x_pos_food = (-7 + (rand() % 13));
 		y_pos_food = (-7 + (rand() % 13));
+
+		while (checkInteraction()) {
+			x_pos_food = (-7 + (rand() % 13));
+			y_pos_food = (-7 + (rand() % 13));
+		}
 		addPoint();
 		Snake::updateSnake();
 	}
@@ -182,6 +187,24 @@ void Render::changeYPoints(float y)
 	ypoints += y;
 }
 
+bool Render::checkInteraction() {
+	if ((x_pos_ob_1 + 1 > x_pos_food &&
+		x_pos_ob_1 - 1 < x_pos_food &&
+		y_pos_ob_1 + 1 > y_pos_food &&
+		y_pos_ob_1 - 1 < y_pos_food) ||
+		(x_pos_ob_2 + 1 > x_pos_food &&
+		x_pos_ob_2 - 1 < x_pos_food &&
+		y_pos_ob_2 + 1 > y_pos_food &&
+		y_pos_ob_2 - 1 < y_pos_food) ||
+		(x_pos_ob_3 + 1 > x_pos_food &&
+		x_pos_ob_3 - 1 < x_pos_food &&
+		y_pos_ob_3 + 1 > y_pos_food &&
+		y_pos_ob_3 - 1 < y_pos_food)) {
+		return true;
+	}
+	return false;
+}
+
 void Render::checkInteractionSnakeWithObstancle() {
 	if((x_pos_ob_1 + 1 > Snake::GetBodyPart(0).GetXPos() &&
 		x_pos_ob_1 - 1 < Snake::GetBodyPart(0).GetXPos() &&
@@ -197,8 +220,6 @@ void Render::checkInteractionSnakeWithObstancle() {
 		y_pos_ob_3 - 1 < Snake::GetBodyPart(0).GetYPos())){
 
 		Menu::gameStart = false;
-		
-
 	}
 }
 

@@ -37,6 +37,7 @@ public:
 	void static changeAngleY(float);
 	void static changeXPoints(float);
 	void static	changeYPoints(float);
+	bool static checkInteraction();
 	void operator=(const Render&) = delete; // not be assignable
 	Render(Render&) = delete; // not clonable 
 };
