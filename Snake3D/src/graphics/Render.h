@@ -19,6 +19,8 @@ private:
 	void static renderObstacle(double, double);
 	void static checkInteractionSnakeWithFood();
 	void static checkInteractionSnakeWithObstancle();
+	void static CheckEndGame();
+	void static checkIntersectionWithSelf();
 	void static initializeCallbacks();
 	void static initializeLighting();
 
@@ -33,6 +35,8 @@ public:
 	void static DrawGameBoard();
 	void static changeAngleX(float);
 	void static changeAngleY(float);
+	void static changeXPoints(float);
+	void static	changeYPoints(float);
 	void operator=(const Render&) = delete; // not be assignable
 	Render(Render&) = delete; // not clonable 
 };

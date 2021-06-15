@@ -5,9 +5,9 @@
 
 const int ::Render::HEIGHT = 700;
 const int ::Render::WIDTH = 600;
-double x_pos_food = (-6 + (rand() % 12));
-double y_pos_food = (-2.5 + (rand() % 12));
-
+double x_pos_food = (-7 + (rand() % 13));
+double y_pos_food = (-7 + (rand() % 13));
+double z_pos_food = 8;
 const double x_pos_ob_1 = (2);
 const double y_pos_ob_1 = (-2);
 
@@ -20,6 +20,9 @@ const double y_pos_ob_3 = (6);
 float xAngle = 0;
 float yAngle = 0;
 float zAngle = 0;
+
+float xpoints = -4;
+float ypoints = 3;
 
 int points = 0;
 int ::Render::POS_X = 0;
@@ -150,11 +153,13 @@ void Render::checkInteractionSnakeWithFood() {
 	if (x_pos_food + 1 > Snake::GetBodyPart(0).GetXPos() &&
 		x_pos_food - 1 < Snake::GetBodyPart(0).GetXPos() &&
 		y_pos_food + 1 > Snake::GetBodyPart(0).GetYPos() &&
-		y_pos_food - 1 < Snake::GetBodyPart(0).GetYPos()) {
+		y_pos_food - 1 < Snake::GetBodyPart(0).GetYPos() &&
+		z_pos_food + 1 > Snake::GetBodyPart(0).GetZPos() &&
+		z_pos_food - 1 < Snake::GetBodyPart(0).GetZPos()) {
 		
 		srand(time(NULL));
-		x_pos_food = (-6) + (rand() % 12);
-		y_pos_food = (-2.5) + (rand() % 12);
+		x_pos_food = (-7 + (rand() % 13));
+		y_pos_food = (-7 + (rand() % 13));
 		addPoint();
 		Snake::updateSnake();
 	}
@@ -165,6 +170,16 @@ void Render::changeAngleX(float x) {
 }
 void Render::changeAngleY(float y) {
 	yAngle += y;
+}
+
+void Render::changeXPoints(float x)
+{
+	xpoints += x;
+}
+
+void Render::changeYPoints(float y)
+{
+	ypoints += y;
 }
 
 void Render::checkInteractionSnakeWithObstancle() {
@@ -187,8 +202,30 @@ void Render::checkInteractionSnakeWithObstancle() {
 	}
 }
 
+void Render::CheckEndGame() {
+	float max = 8;
+	float min = -8;
+
+	if (max <= Snake::GetBodyPart(0).GetXPos() ||
+		min >= Snake::GetBodyPart(0).GetXPos() ||
+		max <= Snake::GetBodyPart(0).GetYPos() ||
+		min >= Snake::GetBodyPart(0).GetYPos()) {
+		Menu::gameStart = false;
+	}
+
+}
+
+void Render::checkIntersectionWithSelf() {
+	if (Snake::checkIntersectionWithSelf()) {
+		Menu::gameStart = false;
+	}
+}
+
+
+
 void Render::renderPoints() {
-	glRasterPos2f(-4, 7);
+
+	glRasterPos2f(xpoints, ypoints);
 
 	std::string tmp = std::to_string(points);
 	std::string tmp1 = "Liczba punktow: " + tmp;
@@ -210,6 +247,8 @@ void Render::DrawGameBoard() {
 	checkInteractionSnakeWithFood();
 	checkInteractionSnakeWithObstancle();
 	renderSnake();
+	CheckEndGame();
+	checkIntersectionWithSelf();
 	renderFood(x_pos_food, y_pos_food);
 	renderObstacle(x_pos_ob_1, y_pos_ob_1);
 	renderObstacle(x_pos_ob_2, y_pos_ob_2);

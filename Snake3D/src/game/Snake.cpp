@@ -10,7 +10,6 @@ void Snake::initSnakeBody() {
 
         for (int i = 0; i <= 100; i++) {
             body[i].SetDirection('N');
-            body[i].SetPlane(1);
             body[i].SetXPos(body[i].GetXPos());
             body[i].SetYPos(body[i].GetYPos());
             body[i].SetZPos(body[i].GetZPos());
@@ -51,6 +50,18 @@ void Snake::updateSnake() {
 }
 void Snake::SetLength(int l) {
 	length = l;
+}
+
+bool Snake::checkIntersectionWithSelf()
+{
+    for (int i = 1; i < length; i++) {
+        if (body[i].GetXPos() == body[0].GetXPos() &&
+            body[i].GetYPos() == body[0].GetYPos() &&
+            body[i].GetZPos() == body[0].GetZPos()) {
+            return true;
+        }
+    }
+    return false;
 }
 
 int Snake::GetLength() {
@@ -106,48 +117,52 @@ SnakeBody Snake::GetBodyPart(int index) {
      for (int i = 0; i <= length; i++) {
          float x = body[i].GetXPos();
          float y = body[i].GetYPos();
-         float z = body[i].GetZPos();
-         int plane = body[i].GetPlane();
+   
 
          if (body[i].GetDirection() == 'N')
          {
              std::this_thread::sleep_for(std::chrono::milliseconds(200/length));
              if (i == 0) {
                  Render::changeAngleX(2);
+                 Render::changeYPoints(0.2);
              }
-        
-              y += 1;
-              body[i].SetYPos(y);
+             y += 1;
+             body[i].SetYPos(y);
          }
 
          if (body[i].GetDirection() == 'S')
          {
              std::this_thread::sleep_for(std::chrono::milliseconds(200 / length));
-             y -= 1;
+     
              if (i == 0) {
                  Render::changeAngleX(-2);
+                 Render::changeYPoints(-0.2);
              }
+             y -= 1;
              body[i].SetYPos(y);
          }
 
          if (body[i].GetDirection() == 'R')
          {
              std::this_thread::sleep_for(std::chrono::milliseconds(200 / length));
-             x += 1;
              if (i == 0) {
                  Render::changeAngleY(-2);
+                 Render::changeXPoints(0.2);
              }
-             body[i].SetXPos(x);
+              x += 1;
+              body[i].SetXPos(x);
          }
 
          if (body[i].GetDirection() == 'L')
          {
              std::this_thread::sleep_for(std::chrono::milliseconds(200 / length));
-             x -= 1;
              if (i == 0) {
                  Render::changeAngleY(2);
+                 Render::changeXPoints(-0.2);
              }
-             body[i].SetXPos(x);
+   
+             x -= 1;
+             body[i].SetXPos(x);    
          }
      }
 }

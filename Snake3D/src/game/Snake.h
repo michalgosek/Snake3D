@@ -26,4 +26,5 @@ public:
 	static void updateSnake();
 	static SnakeBody GetBodyPart(int);
 	static void checkKeyNotification();
+	static bool checkIntersectionWithSelf();
 };
