@@ -3,17 +3,43 @@
 #include "../graphics/Render.h"
 
 int Snake::length = 1;
-bool Snake::load = false;
+
+bool boollength = false;
+
 SnakeBody* Snake::body = new SnakeBody[100];
 
 void Snake::initSnakeBody() {
 
-    for (int i = 0; i <= 100; i++) {
-        body[i].SetDirection('N');
-        body[i].SetXPos(body[i].GetXPos());
-        body[i].SetYPos(body[i].GetYPos());
-        body[i].SetZPos(body[i].GetZPos());
+    if (Menu::returnGameLoad())
+    {
+        int length;
+        float* xpos = Menu::returnxPosFile();
+        float *ypos = Menu::returnyPosFile();
+        float *zpos = Menu::returnzPosFile();
+        char* direct = Menu::returnDirectionFile();
+
+        length = Menu::returnLengthFile();
+
+        for (int i = 0; i < length; i++)
+        {
+            body[i].SetDirection(*(direct+i));
+            body[i].SetXPos(*(xpos+i));
+            body[i].SetYPos(*(ypos+i));
+            body[i].SetZPos(*(zpos+i));
+
+        }
+
     }
+    else
+    {
+        for (int i = 0; i <= 100; i++) {
+            body[i].SetDirection('N');
+            body[i].SetXPos(body[i].GetXPos());
+            body[i].SetYPos(body[i].GetYPos());
+            body[i].SetZPos(body[i].GetZPos());
+        }
+    }
+    
 
 
 }
@@ -27,7 +53,7 @@ void Snake::initNewGame() {
         body[i].SetZPos(8);
     }
 
-    SetLength(1);
+    length = 1;
 
 
 }
@@ -36,7 +62,7 @@ void Snake::initNewGame() {
 void Snake::updateSnake() {
     int snakeSize = GetLength();
     snakeSize++;
-    SetLength(snakeSize);
+    length++;
 
     if (body[snakeSize - 2].GetDirection() == 'N') {
         body[snakeSize - 1].SetXPos(body[snakeSize - 2].GetXPos());
@@ -64,8 +90,23 @@ void Snake::updateSnake() {
     }
 
 }
-void Snake::SetLength(int l) {
-    length = l;
+void Snake::SetLength() {
+    
+    if (!boollength)
+    {
+        if (Menu::returnGameLoad())
+        {
+            length = Menu::returnLengthFile();
+        }
+
+        else
+        {
+            length = 1;
+        }
+
+        boollength = true;
+    }
+    
 
     if (length == 100) {
         Menu::gameStart = false;

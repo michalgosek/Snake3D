@@ -21,10 +21,17 @@ float xAngle = 0;
 float yAngle = 0;
 float zAngle = 0;
 
+bool boolxAngle = false;
+
+
+
 float xpoints = -4;
 float ypoints = 3;
 
-int points = 0;
+bool boolpoints = false;
+int points;
+
+
 int ::Render::POS_X = 0;
 int ::Render::POS_Y = 0;
 
@@ -111,7 +118,7 @@ void Render::renderObstacle(double x_pos, double y_pos) {
 }
 
 void Render::prepareModelView() {
-	std::cout << xAngle;
+	
 	// transform objects inside the viewspace 
 	glTranslatef(0.0f, 0.0f, -100.0f);
 	glRotatef(xAngle, 1.0f, 0.0f, 0.0f);
@@ -147,6 +154,7 @@ void Render::prepareMatrixProjection() {
 }
 
 void Render::addPoint() {
+
 	points++;
 }
 void Render::checkInteractionSnakeWithFood() {
@@ -282,7 +290,43 @@ int Render::returnPoints()
 {
 	return points;
 }
+void Render::setPoints()
+{
+	if (boolpoints)
+	{
+		if (!Menu::returnGameLoad())
+		{
+			points = Menu::returnPointsFile();
+		}
 
+		else
+		{
+			points = 0;
+		}
+	}
+	boolpoints = true;
+}
+
+void Render::setAngle()
+{
+	if (!boolxAngle)
+	{
+		if (Menu::returnGameLoad())
+		{
+			xAngle = Menu::returnxAngleFile();
+			yAngle = Menu::returnyAngleFile();
+			zAngle = Menu::returnzAngleFile();
+		}
+
+		else
+		{
+			xAngle = 0;
+			yAngle = 0;
+			zAngle = 0;
+		}
+	}
+	boolxAngle = true;
+}
 void Render::renderPoints() {
 
 	glRasterPos2f(xpoints, ypoints);
@@ -303,6 +347,9 @@ void Render::DrawGameBoard() {
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	renderPlane();
+	setPoints();
+	Snake::SetLength();
+	setAngle();
 
 	checkInteractionSnakeWithFood();
 	checkInteractionSnakeWithObstancle();
@@ -339,6 +386,7 @@ void Render::Run(int argc, char** argv) {
 	glutInitWindowSize(WIDTH, HEIGHT);
 	glutCreateWindow("Snake3D");
 	Snake::initSnakeBody(); // todo do przeniesniea w inne miejsce..
+	//Menu::setGameLoad(false);
 	initializeCallbacks();
 	glutMainLoop();
 }

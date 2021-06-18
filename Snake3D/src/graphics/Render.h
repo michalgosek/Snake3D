@@ -38,6 +38,8 @@ public:
 	void static changeAngleY(float);
 	void static changeXPoints(float);
 	void static	changeYPoints(float);
+	void static setPoints();
+	void static setAngle();
 	float static returnxAngle();
 	float static returnyAngle();
 	float static returnzAngle();

@@ -1,14 +1,81 @@
 #include "Menu.h"
 #include "../graphics/Render.h"
 
+int length_file;
 
+float xPos_file[100];
+float yPos_file[100];
+float zPos_file[100];
+char direction_file[100];
+
+int points_file;
+
+float xAngle_file;
+float yAngle_file;
+float zAngle_file;
 
 
 bool Menu::gameStart = false;
 bool Menu::gameBreak = false;
+bool Menu::gameLoad = false;
 
+bool Menu::returnGameLoad()
+{
+    return gameLoad;
+}
+
+int Menu::returnLengthFile()
+{
+    return length_file;
+}
+
+float* Menu::returnxPosFile()
+{
+    return xPos_file;
+}
+
+float* Menu::returnyPosFile()
+{
+    return yPos_file;
+}
+
+float* Menu::returnzPosFile()
+{
+    return zPos_file;
+}
+
+char* Menu::returnDirectionFile()
+{
+    return direction_file;
+}
+
+int Menu::returnPointsFile()
+{
+    return points_file;
+}
+
+float Menu::returnxAngleFile()
+{
+    return xAngle_file;
+}
+
+float Menu::returnyAngleFile()
+{
+    return yAngle_file;
+}
+
+float Menu::returnzAngleFile()
+{
+    return zAngle_file;
+}
+
+void Menu::setGameLoad(bool x)
+{
+    gameLoad = x;
+}
 
 void Menu::DisplayFunc() {
+    std::cout << length_file;
     if (gameStart && !gameBreak)
         Render::DrawGameBoard();
     else if (!gameStart && !gameBreak)
@@ -17,6 +84,7 @@ void Menu::DisplayFunc() {
         drawQuitMenu();
     else if (!gameStart && gameBreak)
         drawQuitMenu();
+   
 
     glutPostRedisplay();
 }
@@ -270,8 +338,9 @@ void Menu::Keyboard(unsigned char key, int x, int y)
     case 'L':
     case 'l':
     {
+        loadFromFile();
         gameStart = true;
-        Snake::load = true;
+        gameLoad = true;
         break;
     }
 
@@ -350,8 +419,55 @@ void Menu::loadToFile()
     save << yAngle << std::endl;
     save << zAngle << std::endl;
 
-
-
     save.close();
 
+}
+
+void Menu::loadFromFile()
+{
+    std::ifstream file("data.txt");
+   
+
+    file >> length_file;
+ 
+
+    for (int i = 0; i < length_file; i++)
+    {
+        file >> xPos_file[i];
+  
+    }
+
+    for (int i = 0; i < length_file; i++)
+    {
+        file >> yPos_file[i];
+            
+    }
+
+    for (int i = 0; i < length_file; i++)
+    {
+        file >> zPos_file[i];
+  
+    }
+
+    for (int i = 0; i < length_file; i++)
+    {
+        file >> direction_file[i];
+      
+       
+    }
+
+    file >> points_file;
+   
+   
+
+    file >> xAngle_file;
+   
+
+    file >> yAngle_file;
+    
+   
+    file >> zAngle_file;
+    
+    
+    file.close();
 }
