@@ -14,11 +14,12 @@
 static class Snake
 {
 private:
-	static SnakeBody *body; // max lenght of snake body 
+	static SnakeBody* body; // max lenght of snake body 
 	static int length;
 public:
 	static bool load;
 	static void initSnakeBody();
+	static void initNewGame();
 	static int GetLength();
 	static void SetLength(int);
 	static void Control_System();

@@ -36,7 +36,7 @@ void Render::reshapeFunc(int width, int height) {
 void Render::initializeLighting() {
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
- 	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_COLOR_MATERIAL);
 }
@@ -56,13 +56,13 @@ void Render::renderPlane() {
 void Render::renderSnake() {
 	const float SNAKE_BODY_COLOR[] = { 0.800f, 0.200f, 0.280f };
 	const float SNAKE_HEAD_COLOR[] = { 1.000f, 0.190f, 0.210f };
-	
+
 	Snake::Control_System();
 	glColor3fv(SNAKE_BODY_COLOR);
 	for (int i = 0; i < Snake::GetLength(); i++) {
 		glLoadIdentity();
 
-		
+
 		auto x = Snake::GetBodyPart(i).GetXPos();// -9.5f;
 		auto y = Snake::GetBodyPart(i).GetYPos();// -9.5f;
 		auto z = Snake::GetBodyPart(i).GetZPos();// -9.5f;
@@ -88,7 +88,7 @@ void Render::renderFood(double x_pos, double y_pos) {
 		glutSolidCube(1.0);
 	}
 
-	 delete s;
+	delete s;
 }
 
 void Render::renderObstacle(double x_pos, double y_pos) {
@@ -156,7 +156,7 @@ void Render::checkInteractionSnakeWithFood() {
 		y_pos_food - 1 < Snake::GetBodyPart(0).GetYPos() &&
 		z_pos_food + 1 > Snake::GetBodyPart(0).GetZPos() &&
 		z_pos_food - 1 < Snake::GetBodyPart(0).GetZPos()) {
-		
+
 		srand(time(NULL));
 		x_pos_food = (-7 + (rand() % 13));
 		y_pos_food = (-7 + (rand() % 13));
@@ -168,7 +168,7 @@ void Render::checkInteractionSnakeWithFood() {
 		addPoint();
 		Snake::updateSnake();
 	}
-	
+
 }
 void Render::changeAngleX(float x) {
 	xAngle += x;
@@ -193,34 +193,48 @@ bool Render::checkInteraction() {
 		y_pos_ob_1 + 1 > y_pos_food &&
 		y_pos_ob_1 - 1 < y_pos_food) ||
 		(x_pos_ob_2 + 1 > x_pos_food &&
-		x_pos_ob_2 - 1 < x_pos_food &&
-		y_pos_ob_2 + 1 > y_pos_food &&
-		y_pos_ob_2 - 1 < y_pos_food) ||
+			x_pos_ob_2 - 1 < x_pos_food &&
+			y_pos_ob_2 + 1 > y_pos_food &&
+			y_pos_ob_2 - 1 < y_pos_food) ||
 		(x_pos_ob_3 + 1 > x_pos_food &&
-		x_pos_ob_3 - 1 < x_pos_food &&
-		y_pos_ob_3 + 1 > y_pos_food &&
-		y_pos_ob_3 - 1 < y_pos_food)) {
+			x_pos_ob_3 - 1 < x_pos_food &&
+			y_pos_ob_3 + 1 > y_pos_food &&
+			y_pos_ob_3 - 1 < y_pos_food)) {
 		return true;
 	}
 	return false;
 }
 
 void Render::checkInteractionSnakeWithObstancle() {
-	if((x_pos_ob_1 + 1 > Snake::GetBodyPart(0).GetXPos() &&
+	if ((x_pos_ob_1 + 1 > Snake::GetBodyPart(0).GetXPos() &&
 		x_pos_ob_1 - 1 < Snake::GetBodyPart(0).GetXPos() &&
 		y_pos_ob_1 + 1 > Snake::GetBodyPart(0).GetYPos() &&
 		y_pos_ob_1 - 1 < Snake::GetBodyPart(0).GetYPos()) ||
 		(x_pos_ob_2 + 1 > Snake::GetBodyPart(0).GetXPos() &&
-		x_pos_ob_2 - 1 < Snake::GetBodyPart(0).GetXPos() &&
-		y_pos_ob_2 + 1 > Snake::GetBodyPart(0).GetYPos() &&
-		y_pos_ob_2 - 1 < Snake::GetBodyPart(0).GetYPos()) ||
+			x_pos_ob_2 - 1 < Snake::GetBodyPart(0).GetXPos() &&
+			y_pos_ob_2 + 1 > Snake::GetBodyPart(0).GetYPos() &&
+			y_pos_ob_2 - 1 < Snake::GetBodyPart(0).GetYPos()) ||
 		(x_pos_ob_3 + 1 > Snake::GetBodyPart(0).GetXPos() &&
-		x_pos_ob_3 - 1 < Snake::GetBodyPart(0).GetXPos() &&
-		y_pos_ob_3 + 1 > Snake::GetBodyPart(0).GetYPos() &&
-		y_pos_ob_3 - 1 < Snake::GetBodyPart(0).GetYPos())){
+			x_pos_ob_3 - 1 < Snake::GetBodyPart(0).GetXPos() &&
+			y_pos_ob_3 + 1 > Snake::GetBodyPart(0).GetYPos() &&
+			y_pos_ob_3 - 1 < Snake::GetBodyPart(0).GetYPos())) {
 
 		Menu::gameStart = false;
+		std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+		prepareNewGame();
+		Menu::gameStart = true;
 	}
+}
+
+void Render::prepareNewGame()
+{
+	xAngle = 0;
+	yAngle = 0;
+	zAngle = 0;
+
+	points = 0;
+
+	Snake::initNewGame();
 }
 
 void Render::CheckEndGame() {
@@ -232,6 +246,9 @@ void Render::CheckEndGame() {
 		max <= Snake::GetBodyPart(0).GetYPos() ||
 		min >= Snake::GetBodyPart(0).GetYPos()) {
 		Menu::gameStart = false;
+		std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+		prepareNewGame();
+		Menu::gameStart = true;
 	}
 
 }
@@ -239,10 +256,32 @@ void Render::CheckEndGame() {
 void Render::checkIntersectionWithSelf() {
 	if (Snake::checkIntersectionWithSelf()) {
 		Menu::gameStart = false;
+		std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+		prepareNewGame();
+		Menu::gameStart = true;
+
 	}
 }
 
+float Render::returnxAngle()
+{
+	return xAngle;
+}
 
+float Render::returnyAngle()
+{
+	return yAngle;
+}
+
+float Render::returnzAngle()
+{
+	return zAngle;
+}
+
+int Render::returnPoints()
+{
+	return points;
+}
 
 void Render::renderPoints() {
 
@@ -262,7 +301,7 @@ void Render::DrawGameBoard() {
 	prepareMatrixProjection();
 	prepareModelView();
 
- 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	renderPlane();
 
 	checkInteractionSnakeWithFood();
@@ -284,7 +323,7 @@ void Render::initializeCallbacks() {
 	glutKeyboardFunc(Menu::Keyboard);
 
 	glutDisplayFunc(Menu::DisplayFunc);
-	glutSpecialFunc(Snake::specialKeys); 
+	glutSpecialFunc(Snake::specialKeys);
 	glutReshapeFunc(reshapeFunc);
 }
 
@@ -292,7 +331,7 @@ void Render::initializeCallbacks() {
 void Render::Run(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH | GLUT_MULTISAMPLE);
-	 
+
 	POS_X = (glutGet(GLUT_SCREEN_WIDTH) - WIDTH) >> 1;
 	POS_Y = (glutGet(GLUT_SCREEN_HEIGHT) - HEIGHT) >> 1;
 

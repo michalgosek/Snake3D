@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "freeglut.h"
 #include "../graphics/Menu.h"
 
@@ -10,7 +11,7 @@ private:
 	static const int HEIGHT;
 	static int POS_X;
 	static int POS_Y;
- 
+
 	void static addPoint();
 	void static renderPoints();
 	void static renderPlane();
@@ -23,7 +24,7 @@ private:
 	void static checkIntersectionWithSelf();
 	void static initializeCallbacks();
 	void static initializeLighting();
-
+	void static prepareNewGame();
 	void static prepareMatrixProjection();
 	void static prepareModelView();
 	void static prepareMatrixProjectionWithAngle(float);
@@ -37,6 +38,10 @@ public:
 	void static changeAngleY(float);
 	void static changeXPoints(float);
 	void static	changeYPoints(float);
+	float static returnxAngle();
+	float static returnyAngle();
+	float static returnzAngle();
+	int static returnPoints();
 	bool static checkInteraction();
 	void operator=(const Render&) = delete; // not be assignable
 	Render(Render&) = delete; // not clonable 

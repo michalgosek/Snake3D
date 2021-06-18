@@ -2,12 +2,10 @@
 #include "../graphics/Render.h"
 
 
-#include <iostream>       
-//#include <thread>         
-//#include <chrono> 
 
-bool Menu::gameStart = false; 
-bool Menu::gameBreak = false; 
+
+bool Menu::gameStart = false;
+bool Menu::gameBreak = false;
 
 
 void Menu::DisplayFunc() {
@@ -151,7 +149,7 @@ void Menu::drawMenu()
 
     glFlush();
     glutSwapBuffers();
-    std::this_thread::sleep_for(std::chrono::milliseconds(2000 ));
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 }
 
 void Menu::drawQuitMenu()
@@ -162,7 +160,7 @@ void Menu::drawQuitMenu()
 
     //first rectangle
     float leftx_f, rightx_f;
-   
+
     //second rectangle
     float leftx_s, rightx_s;
 
@@ -176,7 +174,7 @@ void Menu::drawQuitMenu()
 
     leftx_f = -0.8;
     rightx_f = -0.1;
-    
+
     topy = 0.1;
     bottomy = -0.2;
 
@@ -259,26 +257,14 @@ void Menu::Keyboard(unsigned char key, int x, int y)
     case 27:
     {
         gameBreak = true;
-       
-        switch (key)
-        {
-            case '27':
-            case 'y':
-            { //funkcja do wrzucenia danych do pliku
-                exit(0);
-                break;
-            }
-            case 'X':
-            case 'x':
-                exit(0);
-                break;
-        }
+        loadToFile();
+        exit(0);
         break;
     }
 
     case 'N':
     case 'n':
-        if (!gameStart) 
+        if (!gameStart)
             gameStart = true;
         break;
     case 'L':
@@ -301,4 +287,71 @@ void Menu::Keyboard(unsigned char key, int x, int y)
             exit(0);
         break;
     }
+}
+
+void Menu::loadToFile()
+{
+
+    int length;
+
+    float xPos[100];
+    float yPos[100];
+    float zPos[100];
+    char direction[100];
+
+    int points;
+
+    float xAngle;
+    float yAngle;
+    float zAngle;
+
+    std::ofstream save("data.txt");
+
+    length = Snake::GetLength();
+    save << length << std::endl;
+
+    for (int i = 0; i < length; i++)
+    {
+        xPos[i] = Snake::GetBodyPart(0).GetXPos();
+        save << xPos[i] << std::endl;
+
+    }
+
+    for (int i = 0; i < length; i++)
+    {
+        yPos[i] = Snake::GetBodyPart(0).GetYPos();
+        save << yPos[i] << std::endl;
+
+    }
+    
+    for (int i = 0; i < length; i++)
+    {
+        zPos[i] = Snake::GetBodyPart(0).GetZPos();
+        save << zPos[i] << std::endl;
+
+    }
+
+    for (int i = 0; i < length; i++)
+    {
+        direction[i] = Snake::GetBodyPart(0).GetDirection();
+        save << direction[i] << std::endl;
+
+    }
+
+    points = Render::returnPoints();
+
+    xAngle = Render::returnxAngle();
+    yAngle = Render::returnyAngle();
+    zAngle = Render::returnzAngle();
+   
+    save << points << std::endl;
+
+    save << xAngle << std::endl;
+    save << yAngle << std::endl;
+    save << zAngle << std::endl;
+
+
+
+    save.close();
+
 }
